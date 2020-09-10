@@ -27,6 +27,12 @@ allprojects {
     kotlinOptions {
       jvmTarget = JavaVersion.VERSION_1_8
     }
+
+    kapt {
+      javacOptions {
+        option("-Adagger.validateTransitiveComponentDependencies=DISABLED")
+      }
+    }
   }
 }
 
