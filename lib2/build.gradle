@@ -1,39 +1,36 @@
 import static dependencies.DependenciesKt.*
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: "androidx.navigation.safeargs.kotlin"
 
 android {
   compileSdkVersion COMPILE_SDK
 
   defaultConfig {
-    applicationId "com.github.satoshun.example"
     minSdkVersion MIN_SDK
     targetSdkVersion TARGET_SDK
     versionCode 1
     versionName "1.0"
+
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    consumerProguardFiles "consumer-rules.pro"
   }
+
   buildTypes {
     release {
       minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
     }
   }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
-  viewBinding {
-    enabled = true
-  }
 }
 
 dependencies {
-  implementation project(":lib1")
-
   implementation KOTLIN
 
   implementation MATERIAL
@@ -44,24 +41,8 @@ dependencies {
   implementation ACTIVITYX
   implementation FRAGMENTX
 
-  implementation LIFECYCLE_RUNTIME
-
-  implementation COROUTINE
-  implementation UI_COROUTINE
-
-  implementation SWIPE_REFRESH_LAYOUT
-
-  implementation COIL
-
-  implementation NAVIGATION
-  implementation NAVIGATION_FRAGMENT
-  implementation NAVIGATION_UI
+  implementation("com.squareup.okhttp3:okhttp:4.8.1")
 
   implementation DAGGER_RUNTIME
   kapt DAGGER_COMPILER
-
-  testImplementation JUNIT
-
-  androidTestImplementation TEST_RUNNER
-  androidTestImplementation ESPRESSO
 }
